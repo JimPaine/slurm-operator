@@ -14,5 +14,12 @@ jobs:
 
     steps:
     - uses: actions/checkout@v4
+    - uses: docker/login-action@v1
+      with:
+        registry: ghcr.io
+        username: ${{ github.actor }}
+        password: ${{ secrets.GITHUB_TOKEN }}
     - name: Build the Docker image
-      run: docker build . --file Dockerfile --tag slurm-operator:0.4.$(date +%s)-jim
+      run: docker build . --file Dockerfile --tag ghcr.io/jimpaine/slurm-operator:0.4.0-jim
+    - name: Publish image
+      run: docker push ghcr.io/jimpaine/slurm-operator:0.4.0-jim
