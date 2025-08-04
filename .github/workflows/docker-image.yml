@@ -20,6 +20,10 @@ jobs:
         username: ${{ github.actor }}
         password: ${{ secrets.GITHUB_TOKEN }}
     - name: Build the Docker image
-      run: docker build . --file Dockerfile --tag ghcr.io/jimpaine/slurm-operator:0.4.0-jim
+      run: docker build . --file WebhookDockerfile --tag ghcr.io/jimpaine/slurm-operator-webhook:0.4.1-jim
     - name: Publish image
-      run: docker push ghcr.io/jimpaine/slurm-operator:0.4.0-jim
+      run: docker push ghcr.io/jimpaine/slurm-operator-webhook:0.4.1-jim
+    - name: Build the Docker image
+      run: docker build . --file ManagerDockerfile --tag ghcr.io/jimpaine/slurm-operator:0.4.1-jim
+    - name: Publish image
+      run: docker push ghcr.io/jimpaine/slurm-operator:0.4.1-jim
